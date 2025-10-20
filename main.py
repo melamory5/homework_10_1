@@ -1,6 +1,4 @@
-from src import masks
-from src import widget
-
+from src import masks, widget
 
 print(masks.get_mask_card_number(4400567890908765))
 
