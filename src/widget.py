@@ -1,3 +1,4 @@
+from datetime import datetime
 
 def mask_account_card(type_and_card_number: str) -> str:
     """Функция, принимающая тип и номер карты или счета, и выводит строку с замаскированным номером"""
@@ -18,27 +19,18 @@ def mask_account_card(type_and_card_number: str) -> str:
     else:
         print("Неправильный номер")
 
-    return card_or_account + " " + new_number_of_card_or_account
+    return card_or_account + new_number_of_card_or_account
 
 
-print(mask_account_card("Maestro 1596837868705199"))
+def get_date(date_str: str) -> str:
+    """Функция, принимающая дату в ISO формате и возвращающая ДД.ММ.ГГГГ"""
+    if not isinstance(date_str, str):
+        raise TypeError("На вход должна подаваться строка")
+    if not date_str.strip():
+        raise ValueError("Строка с датой пуста")
+    try:
+        dt = datetime.fromisoformat(date_str)
+        return dt.strftime("%d.%m.%Y")
+    except (ValueError, IndexError):
+        raise ValueError("Некорректный формат даты")
 
-print(mask_account_card("Счет 64686473678894779589"))
-
-
-def get_date(date: str) -> str:
-    """Функция, принимающая дату и выводящая дату в новом формате"""
-    new_date = ""
-    day = ""
-    month = ""
-    year = ""
-    split_date = date.split("T")
-    new_date = split_date[0]
-    day = new_date[-2:]
-    month = new_date[-5:-3]
-    year = new_date[0:4]
-
-    return day + "." + month + "." + year
-
-
-print(get_date("2024-03-11T02:26:18.671407"))
