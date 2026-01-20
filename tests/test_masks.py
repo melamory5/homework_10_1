@@ -1,14 +1,14 @@
 import pytest
-from src.masks import get_mask_card_number
-from src.masks import get_mask_account
+
+from src.masks import get_mask_account, get_mask_card_number
 
 
 @pytest.fixture
-def card_number_example():
+def card_number_example() -> int:
     return 1234567812345678
 
 
-def test_mask_standard(card_number_example):
+def test_mask_standard(card_number_example: int) -> None:
     result = get_mask_card_number(card_number_example)
     assert result == "1234 56** **** 5678"
 
@@ -17,7 +17,7 @@ def test_mask_standard(card_number_example):
     123456781234567,
     12345678123456789,
     ""])
-def test_mask_card_invalid_length(wrong_number):
+def test_mask_card_invalid_length(wrong_number: str | int) -> None:
     # Проверяем, что функция корректно реагирует на неправильную длину
     with pytest.raises(ValueError):
         get_mask_card_number(wrong_number)
@@ -28,18 +28,18 @@ def test_mask_card_invalid_length(wrong_number):
     "123 567812345678",
     "123-567812345678",
     "123p567812345678"])
-def test_mask_card_invalid_length(wrong_number: str | int):
+def test_mask_card_unnecessary_symbols(wrong_number: int) -> None:
     # Проверяем, что функция корректно реагирует на лишние символы
     with pytest.raises(ValueError):
         get_mask_card_number(wrong_number)
 
 
 @pytest.fixture
-def account_number_example():
+def account_number_example() -> str:
     return "64686473678894779589"
 
 
-def test_mask_account_standard(account_number_example: int | str):
+def test_mask_account_standard(account_number_example: int) -> None:
     result = get_mask_account(account_number_example)
     assert result == "**9589"
 
@@ -48,7 +48,7 @@ def test_mask_account_standard(account_number_example: int | str):
     123456781234567891234,
     12345678123456789,
     ""])
-def test_mask_account_invalid_length(wrong_number):
+def test_mask_account_invalid_length(wrong_number: str | int) -> None:
     # Проверяем, что функция корректно реагирует на неправильную длину
     with pytest.raises(ValueError):
         get_mask_account(wrong_number)
@@ -59,7 +59,7 @@ def test_mask_account_invalid_length(wrong_number):
     "123 5678123456781234",
     "123-5678123456781234",
     "123p5678123456781234"])
-def test_mask_account_invalid_length(wrong_number: str | int):
+def test_mask_account_unnecessary_symbols(wrong_number: int) -> None:
     # Проверяем, что функция корректно реагирует на лишние символы
     with pytest.raises(ValueError):
         get_mask_account(wrong_number)

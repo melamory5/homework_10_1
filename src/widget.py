@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def mask_account_card(type_and_card_number: str) -> str:
     """Функция, принимающая тип и номер карты или счета, и выводит строку с замаскированным номером"""
     card_or_account = ""
@@ -33,4 +34,5 @@ def get_date(date_str: str) -> str:
         return dt.strftime("%d.%m.%Y")
     except (ValueError, IndexError):
         raise ValueError("Некорректный формат даты")
+
 

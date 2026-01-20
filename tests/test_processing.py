@@ -1,10 +1,10 @@
 import pytest
-from src.processing import filter_by_state
-from src.processing import sort_by_date
+
+from src.processing import filter_by_state, sort_by_date
 
 
 @pytest.fixture
-def sample_data():
+def sample_data() -> list:
     return [
         {"id": 1, "state": "EXECUTED", "amount": 100},
         {"id": 2, "state": "CANCELED", "amount": 200},
@@ -17,18 +17,17 @@ def sample_data():
                                    "CANCELED",
                                    "DELETED",
                                    ""])
-def test_filter_by_state_empty_list(state):
+def test_filter_by_state_empty_list(state: str) -> None:
     assert filter_by_state([], "EXECUTED") == []
 
 
-def test_filter_by_state_no_state_key():
-    """Проверка устойчивости, если в словаре нет ключа state"""
+def test_filter_by_state_no_state_key() -> None:
     no_state_list = [{"id": 1, "amount": 100}]
     assert filter_by_state(no_state_list, "EXECUTED") == []
 
 
 @pytest.fixture
-def example_of_dates():
+def example_of_dates() -> list:
     return [
         {"id": 1, "date": "2024-03-11T02:26:18.671407"},
         {"id": 2, "date": "2023-05-20T12:32:10.879000"},
@@ -36,14 +35,14 @@ def example_of_dates():
     ]
 
 
-def test_sort_by_date_descending(example_of_dates):
+def test_sort_by_date_descending(example_of_dates: list) -> None:
     result = sort_by_date(example_of_dates)
     assert result[0]["id"] == 3
     assert result[1]["id"] == 1
     assert result[2]["id"] == 2
 
 
-def test_sort_by_date_ascending(example_of_dates):
+def test_sort_by_date_ascending(example_of_dates: list):
     result = sort_by_date(example_of_dates, reverse=False)
     assert result[0]["id"] == 2
     assert result[2]["id"] == 3
