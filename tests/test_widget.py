@@ -27,7 +27,6 @@ def wrong_account_card(wrong_account_card: str) -> None:
 
 @pytest.fixture
 def sample_iso_date() -> str:
-    return get_date()
     return "2024-03-11T02:26:18.671407"
 
 
