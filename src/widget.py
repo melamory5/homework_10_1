@@ -34,5 +34,3 @@ def get_date(date_str: str) -> str:
         return dt.strftime("%d.%m.%Y")
     except (ValueError, IndexError):
         raise ValueError("Некорректный формат даты")
-
-

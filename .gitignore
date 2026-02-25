@@ -215,4 +215,6 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 .idea/
-.htmlcov/
+/tmp/
+/dist/
+!htmlcov/

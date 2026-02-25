@@ -54,5 +54,3 @@ def test_get_date_parametrized(input_date: str, expected: str) -> None:
 def test_get_date_errors(invalid_input: str) -> None:
     with pytest.raises(ValueError):
         get_date(invalid_input)
-
-
